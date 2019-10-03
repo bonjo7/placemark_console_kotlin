@@ -6,6 +6,7 @@ import mu.KotlinLogging
 private val logger = KotlinLogging.logger {}
 
 var placemark = PlacemarkModel()
+val placemarks = ArrayList<PlacemarkModel>()
 
 fun main(args: Array<String>){
     logger.info { "Launching Placemark Console App" }
@@ -54,7 +55,15 @@ fun addPlacemark() {
     placemark.title = readLine()!!
     println("\nEnter a description: ")
     placemark.description = readLine()!!
-    println("You entered \"${placemark.title}\" as the title and \"${placemark.description}\" as the description")
+
+    if(placemark.title.isNotEmpty() && placemark.description.isNotEmpty()){
+        placemarks.add(placemark.copy())
+        println("Successfully entered \"${placemark.title}\" as the title and \"${placemark.description}\" as the description")
+        logger.info ("Placemark Added: [$placemark]")
+    }
+    else
+        println("Failed to add, please enter title and description next time")
+        logger.info("Placemark not added")
 }
 
 fun updatePlacemark() {
@@ -67,6 +76,8 @@ fun updatePlacemark() {
 }
 
 fun listAllPlacemarks() {
-    println("You choose to list all placemarks")
+    println("List Placemarks")
+    println()
+    placemarks.forEach{ logger.info { "${it}" } }
 }
 
