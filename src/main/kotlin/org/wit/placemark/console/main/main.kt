@@ -4,12 +4,14 @@ import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
 
+var title : String = ""
+var description: String = ""
+
 fun main(args: Array<String>){
     logger.info { "Launching Placemark Console App" }
     println("\nPlacemark Kotlin App Version 1.0")
 
     var input: Int
-
     do {
         input = menu()
         when(input) {
@@ -46,13 +48,25 @@ fun menu(): Int {
 }
 
 fun addPlacemark() {
-    println("You choose to update a Placemark")
+
+    println("Add Placemark")
+    println("\n\nEnter a Title: ")
+    title = readLine()!!
+    println("\nEnter a description: ")
+    description = readLine()!!
+    println("You entered \"$title\" as the title and \"$description\" as the description")
 }
 
 fun updatePlacemark() {
-    println("You choose to update Placemark")
+    println("Update Placemark")
+    println("\n\nEnter a new title for \"$title\": ")
+    title = readLine()!!
+    println("Enter a new description for \"$description\": ")
+    description = readLine()!!
+    println("You updated \"$title\" for title and \"$description\" as description")
 }
 
 fun listAllPlacemarks() {
-    println("You choose to list all Placemarks")
+    println("You choose to list all placemarks")
 }
+
