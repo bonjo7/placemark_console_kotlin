@@ -1,5 +1,6 @@
 package org.wit.placemark.console.main
 
+import jdk.nashorn.internal.objects.NativeString.search
 import models.PlacemarkModel
 import mu.KotlinLogging
 
@@ -19,6 +20,7 @@ fun main(args: Array<String>){
             1 -> addPlacemark()
             2 -> updatePlacemark()
             3 -> listAllPlacemarks()
+            4 -> searchPlacemark()
             0 -> println("Exiting App - Bye Bye")
             else -> print("Invalid Option, select again")
         }
@@ -36,6 +38,7 @@ fun menu(): Int {
     println("\n\t 1. Add Placemark")
     println("\t 2. Update Placemark")
     println("\t 3. List All Placemarks")
+    println("\t 4. Search Placemarks")
     println("\t 0. Exit")
     println("\nEnter an integer: ")
 
@@ -50,16 +53,19 @@ fun menu(): Int {
 
 fun addPlacemark() {
 
+    var aPlacemark = PlacemarkModel()
+
     println("Add Placemark")
     println("\n\nEnter a Title: ")
-    placemark.title = readLine()!!
+    aPlacemark.title = readLine()!!
     println("\nEnter a description: ")
-    placemark.description = readLine()!!
+    aPlacemark.description = readLine()!!
 
-    if(placemark.title.isNotEmpty() && placemark.description.isNotEmpty()){
-        placemarks.add(placemark.copy())
-        println("Successfully entered \"${placemark.title}\" as the title and \"${placemark.description}\" as the description")
-        logger.info ("Placemark Added: [$placemark]")
+    if(aPlacemark.title.isNotEmpty() && aPlacemark.description.isNotEmpty()){
+        aPlacemark.id = placemarks.size.toLong()
+        placemarks.add(aPlacemark.copy())
+        println("Successfully entered \"${aPlacemark.title}\" as the title and \"${aPlacemark.description}\" as the description")
+        logger.info ("Placemark Added: [$aPlacemark]")
     }
     else
         println("Failed to add, please enter title and description next time")
@@ -68,11 +74,21 @@ fun addPlacemark() {
 
 fun updatePlacemark() {
     println("Update Placemark")
-    println("\n\nEnter a new title for \"${placemark.title}\": ")
-    placemark.title = readLine()!!
-    println("Enter a new description for \"${placemark.description}\": ")
-    placemark.description = readLine()!!
-    println("You updated \"${placemark.title}\" for title and \"${placemark.description}\" as description")
+    println()
+    listAllPlacemarks()
+    var searchId = getId()
+    val aPlacemark = search(searchId)
+
+    if(aPlacemark != null) {
+        print("Enter a new Title for \" ${aPlacemark.title}\": ")
+        aPlacemark.title = readLine()!!
+        print("Enter a new Description for \"${aPlacemark.description}\": ")
+        aPlacemark.description = readLine()!!
+        println("You updated \"${aPlacemark.title}\" for title and \"${aPlacemark.description}\" for description"
+        )
+    }
+    else
+        println("Placemark Not Updated...")
 }
 
 fun listAllPlacemarks() {
@@ -81,3 +97,33 @@ fun listAllPlacemarks() {
     placemarks.forEach{ logger.info { "${it}" } }
 }
 
+fun getId() : Long {
+    var strId : String?
+    var searchId : Long
+
+    print("Enter ID to search/update: ")
+    strId = readLine()!!
+
+    searchId = if(strId.toLongOrNull() != null && !strId.isEmpty())
+        strId.toLong()
+    else
+        0
+    return searchId
+
+}
+
+fun search(id : Long) : PlacemarkModel? {
+    var foundPlacemark : PlacemarkModel? = placemarks.find { p -> p.id == id }
+    return foundPlacemark
+}
+
+fun searchPlacemark() {
+
+    var searchId = getId()
+    val aPlacemark = search(searchId)
+
+    if(aPlacemark != null)
+        println("Placemark Details [ $aPlacemark ]")
+    else
+        println("Placemark Not Found...")
+}
