@@ -21,6 +21,7 @@ fun main(args: Array<String>){
             2 -> updatePlacemark()
             3 -> listAllPlacemarks()
             4 -> searchPlacemark()
+            -99 -> dummyData()
             0 -> println("Exiting App - Bye Bye")
             else -> print("Invalid Option, select again")
         }
@@ -78,14 +79,22 @@ fun updatePlacemark() {
     listAllPlacemarks()
     var searchId = getId()
     val aPlacemark = search(searchId)
+    var tempTitle : String?
+    var tempDesc : String?
 
     if(aPlacemark != null) {
         print("Enter a new Title for \" ${aPlacemark.title}\": ")
-        aPlacemark.title = readLine()!!
+        tempTitle = readLine()!!
         print("Enter a new Description for \"${aPlacemark.description}\": ")
-        aPlacemark.description = readLine()!!
-        println("You updated \"${aPlacemark.title}\" for title and \"${aPlacemark.description}\" for description"
-        )
+        tempDesc= readLine()!!
+
+        if(!tempTitle.isNullOrEmpty() && !tempDesc.isNullOrEmpty()){
+            aPlacemark.title = tempTitle
+            aPlacemark.description = tempDesc
+            println("You updated \"${aPlacemark.title}\" for title and \"${aPlacemark.description}\" for description")
+        }
+        else
+            logger.info ("Placemark not updated")
     }
     else
         println("Placemark Not Updated...")
@@ -126,4 +135,10 @@ fun searchPlacemark() {
         println("Placemark Details [ $aPlacemark ]")
     else
         println("Placemark Not Found...")
+}
+
+fun dummyData() {
+    placemarks.add(PlacemarkModel(1, "New York New York", "So Good They Named It Twice"))
+    placemarks.add(PlacemarkModel(2, "Ring of Kerry", "Some place in the Kingdom"))
+    placemarks.add(PlacemarkModel(3, "Waterford City", "You get great Blaas Here!!"))
 }
