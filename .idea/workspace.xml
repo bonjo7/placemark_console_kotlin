@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8ee99715-8de6-4c3f-a011-73a3c90f1556" name="Default Changelist" comment="" />
+    <list default="true" id="8ee99715-8de6-4c3f-a011-73a3c90f1556" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/org/wit/placemark/console/main/models/PlacemarkJSONStore.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/wit/placemark/console/main/controllers/PlacemarkCOntroller.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/wit/placemark/console/main/controllers/PlacemarkCOntroller.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/wit/placemark/console/main/views/PlacemarkView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/wit/placemark/console/main/views/PlacemarkView.kt" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,6 +88,7 @@
       <workItem from="1568901842474" duration="4550000" />
       <workItem from="1570109706761" duration="6508000" />
       <workItem from="1570630456206" duration="3944000" />
+      <workItem from="1571414791326" duration="1979000" />
     </task>
     <servers />
   </component>
