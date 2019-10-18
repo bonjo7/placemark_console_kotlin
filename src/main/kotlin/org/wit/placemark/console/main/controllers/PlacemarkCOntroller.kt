@@ -7,6 +7,7 @@ import org.wit.placemark.console.main.models.PlacemarkModel
 import org.wit.placemark.console.main.searchPlacemark
 import org.wit.placemark.console.main.updatePlacemark
 import org.wit.placemark.console.main.views.PlacemarkView
+import java.nio.file.Files.delete
 
 class PlacemarkController {
 
@@ -72,6 +73,20 @@ class PlacemarkController {
         placemarks.create(PlacemarkModel(title = "Waterford City", description = "You get great Blaas Here!!"))
     }
 
+    fun delete() {
+        placemarkView.listPlacemarks(placemarks)
+        var searchId = placemarkView.getId()
+        val aPlacemark = search(searchId)
+
+        if(aPlacemark != null) {
+            placemarks.delete(aPlacemark)
+            println("Placemark Deleted...")
+            placemarkView.listPlacemarks(placemarks)
+        }
+        else
+            println("Placemark Not Deleted...")
+    }
+
     fun start(){
         logger.info { "Launching Placemark Console App" }
         println("Placemark Kotlin App Version 1.0")
@@ -85,6 +100,7 @@ class PlacemarkController {
                 2 -> updatePlacemark()
                 3 -> list()
                 4 -> searchPlacemark()
+                5 -> delete()
                 -99 -> dummyData()
                 0 -> println("Exiting App")
                 else -> println("Invalid Option")

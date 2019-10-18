@@ -65,4 +65,9 @@ class PlacemarkJSONStore : PlacemarkStore {
         val jsonString = read(JSON_FILE)
         placemarks = Gson().fromJson(jsonString, listType)
     }
+
+    override fun delete(placemark: PlacemarkModel) {
+        placemarks.remove(placemark)
+        serialize()
+    }
 }

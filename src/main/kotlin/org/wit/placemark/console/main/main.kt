@@ -4,7 +4,6 @@ import org.wit.placemark.console.main.models.PlacemarkModel
 import mu.KotlinLogging
 import org.wit.placemark.console.main.controllers.PlacemarkController
 import org.wit.placemark.console.main.models.PlacemarkJSONStore
-import org.wit.placemark.console.main.models.PlacemarkMemStore
 import org.wit.placemark.console.main.views.PlacemarkView
 
 private val logger = KotlinLogging.logger {}
